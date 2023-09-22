@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, StatusBar, FlatList } from 'react-native';
 import Header from '../../components/Header';
 import Balance from '../../components/Balance';
+import Moviments from '../../components/Moviments';
 
 const list = [
   {
@@ -12,18 +13,18 @@ const list = [
     type: 0,
   },
   {
-    id: 1,
+    id: 2,
     label: 'Pix Cliente',
     value: '550,00',
     date: '02/11/2023',
     type: 1,
   },
   {
-    id: 1,
+    id: 3,
     label: 'Salário',
     value: '1.250,00',
     date: '01/01/2023',
-    type: 0,
+    type: 1,
   }
 ]
 
@@ -35,7 +36,9 @@ export default function Home() {
         <Text style={styles.title}>Últimas movimentações</Text>
         <FlatList
             style={styles.list}
-            rederItem={(item)=>{item.label}}
+            data={list}
+            keyExtractor={(item)=>String(item.id)}
+            renderItem={({item})=> <Moviments data={item}/>}
         />
 
     </View>
@@ -50,8 +53,10 @@ const styles = StyleSheet.create({
     title:{
       fontSize: 18,
       fontWeight: 'bold',
-      marginLeft: 14,
-      marginRight: 14,
-      marginTop: 14,
+      margin: 14
+    },
+    list:{
+      marginEnd: 14,
+      marginStart: 14,
     }
 });
